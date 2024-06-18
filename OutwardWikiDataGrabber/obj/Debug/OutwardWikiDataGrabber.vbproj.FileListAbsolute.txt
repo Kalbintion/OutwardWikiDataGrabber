@@ -9,3 +9,14 @@ C:\Users\KDK\AppData\Local\Temporary Projects\OutwardWikiDataGrabber\obj\Debug\O
 C:\Users\KDK\AppData\Local\Temporary Projects\OutwardWikiDataGrabber\obj\Debug\OutwardWikiDataGrabber.exe
 C:\Users\KDK\AppData\Local\Temporary Projects\OutwardWikiDataGrabber\obj\Debug\OutwardWikiDataGrabber.xml
 C:\Users\KDK\AppData\Local\Temporary Projects\OutwardWikiDataGrabber\obj\Debug\OutwardWikiDataGrabber.pdb
+C:\Projects\VS17\OutwardWikiDataGrabber\OutwardWikiDataGrabber\bin\Debug\OutwardWikiDataGrabber.exe.config
+C:\Projects\VS17\OutwardWikiDataGrabber\OutwardWikiDataGrabber\bin\Debug\OutwardWikiDataGrabber.exe
+C:\Projects\VS17\OutwardWikiDataGrabber\OutwardWikiDataGrabber\bin\Debug\OutwardWikiDataGrabber.pdb
+C:\Projects\VS17\OutwardWikiDataGrabber\OutwardWikiDataGrabber\bin\Debug\OutwardWikiDataGrabber.xml
+C:\Projects\VS17\OutwardWikiDataGrabber\OutwardWikiDataGrabber\obj\Debug\OutwardWikiDataGrabber.vbprojResolveAssemblyReference.cache
+C:\Projects\VS17\OutwardWikiDataGrabber\OutwardWikiDataGrabber\obj\Debug\OutwardWikiDataGrabber.frmMain.resources
+C:\Projects\VS17\OutwardWikiDataGrabber\OutwardWikiDataGrabber\obj\Debug\OutwardWikiDataGrabber.Resources.resources
+C:\Projects\VS17\OutwardWikiDataGrabber\OutwardWikiDataGrabber\obj\Debug\OutwardWikiDataGrabber.vbproj.GenerateResource.Cache
+C:\Projects\VS17\OutwardWikiDataGrabber\OutwardWikiDataGrabber\obj\Debug\OutwardWikiDataGrabber.exe
+C:\Projects\VS17\OutwardWikiDataGrabber\OutwardWikiDataGrabber\obj\Debug\OutwardWikiDataGrabber.xml
+C:\Projects\VS17\OutwardWikiDataGrabber\OutwardWikiDataGrabber\obj\Debug\OutwardWikiDataGrabber.pdb

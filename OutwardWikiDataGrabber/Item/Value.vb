@@ -1,4 +1,6 @@
-﻿Namespace Item
+﻿Imports Newtonsoft.Json
+
+Namespace Item
     Public Class Value
         Public Property Sell As Double
         Public Property Buy As Double
@@ -12,7 +14,7 @@
         End Function
 
         Public Function AsJSON() As String
-            Return "{""buy"": " & Buy & """, ""sell"": " & Sell & "}"
+            Return JsonConvert.SerializeObject(Me)
         End Function
     End Class
 End Namespace
