@@ -20,3 +20,5 @@ C:\Projects\VS17\OutwardWikiDataGrabber\OutwardWikiDataGrabber\obj\Debug\Outward
 C:\Projects\VS17\OutwardWikiDataGrabber\OutwardWikiDataGrabber\obj\Debug\OutwardWikiDataGrabber.exe
 C:\Projects\VS17\OutwardWikiDataGrabber\OutwardWikiDataGrabber\obj\Debug\OutwardWikiDataGrabber.xml
 C:\Projects\VS17\OutwardWikiDataGrabber\OutwardWikiDataGrabber\obj\Debug\OutwardWikiDataGrabber.pdb
+C:\Projects\VS17\OutwardWikiDataGrabber\OutwardWikiDataGrabber\bin\Debug\Newtonsoft.Json.dll
+C:\Projects\VS17\OutwardWikiDataGrabber\OutwardWikiDataGrabber\bin\Debug\Newtonsoft.Json.xml

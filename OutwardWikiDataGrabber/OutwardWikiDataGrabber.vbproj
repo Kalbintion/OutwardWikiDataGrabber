@@ -83,9 +83,12 @@
       <DependentUpon>frmMain.vb</DependentUpon>
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Item\Data.vb" />
+    <Compile Include="Item\Core.vb" />
     <Compile Include="Item\Enum\E_DAMAGE_TYPES.vb" />
-    <Compile Include="Item\Stats.vb" />
+    <Compile Include="Item\Food.vb" />
+    <Compile Include="Item\Stats\Defensive.vb" />
+    <Compile Include="Item\Stats\Offensive.vb" />
+    <Compile Include="Item\Stats\Core.vb" />
     <Compile Include="Item\Value.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
@@ -128,6 +131,9 @@
     </None>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Pages\Complete.html" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>
