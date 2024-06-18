@@ -1,0 +1,11 @@
+C:\Users\KDK\AppData\Local\Temporary Projects\OutwardWikiDataGrabber\bin\Debug\OutwardWikiDataGrabber.exe.config
+C:\Users\KDK\AppData\Local\Temporary Projects\OutwardWikiDataGrabber\bin\Debug\OutwardWikiDataGrabber.exe
+C:\Users\KDK\AppData\Local\Temporary Projects\OutwardWikiDataGrabber\bin\Debug\OutwardWikiDataGrabber.pdb
+C:\Users\KDK\AppData\Local\Temporary Projects\OutwardWikiDataGrabber\bin\Debug\OutwardWikiDataGrabber.xml
+C:\Users\KDK\AppData\Local\Temporary Projects\OutwardWikiDataGrabber\obj\Debug\OutwardWikiDataGrabber.vbprojResolveAssemblyReference.cache
+C:\Users\KDK\AppData\Local\Temporary Projects\OutwardWikiDataGrabber\obj\Debug\OutwardWikiDataGrabber.frmMain.resources
+C:\Users\KDK\AppData\Local\Temporary Projects\OutwardWikiDataGrabber\obj\Debug\OutwardWikiDataGrabber.Resources.resources
+C:\Users\KDK\AppData\Local\Temporary Projects\OutwardWikiDataGrabber\obj\Debug\OutwardWikiDataGrabber.vbproj.GenerateResource.Cache
+C:\Users\KDK\AppData\Local\Temporary Projects\OutwardWikiDataGrabber\obj\Debug\OutwardWikiDataGrabber.exe
+C:\Users\KDK\AppData\Local\Temporary Projects\OutwardWikiDataGrabber\obj\Debug\OutwardWikiDataGrabber.xml
+C:\Users\KDK\AppData\Local\Temporary Projects\OutwardWikiDataGrabber\obj\Debug\OutwardWikiDataGrabber.pdb
