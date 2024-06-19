@@ -1,2 +1,3 @@
 .vs
 ./OutwardWikiDataGrabber/bin/*
+./OutwardWikiDataGrabber/obj/*
