@@ -23,11 +23,11 @@ Namespace Item.Stats
         End Sub
 
         Public Sub ParseDamage(ByVal damageData As HtmlElement)
-
+            Console.WriteLine("ParseDamage" & vbCrLf & damageData.InnerHtml)
         End Sub
 
         Public Sub ParseDamageBonus(ByVal damageData As HtmlElement)
-
+            Console.WriteLine("ParseDamageBonus" & vbCrLf & damageData.InnerHtml)
         End Sub
 
         Public Function AsJSON() As String

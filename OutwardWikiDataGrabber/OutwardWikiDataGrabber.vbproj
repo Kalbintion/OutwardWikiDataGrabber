@@ -84,7 +84,6 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Item\Core.vb" />
-    <Compile Include="Item\Enum\E_DAMAGE_TYPES.vb" />
     <Compile Include="Item\Food.vb" />
     <Compile Include="Item\Stats\Defensive.vb" />
     <Compile Include="Item\Stats\Offensive.vb" />

@@ -16,7 +16,7 @@ Namespace Item.Stats
         End Function
 
         Public Sub ParseResist(ByVal resistData As HtmlElement)
-
+            Console.WriteLine("ParseResist" & vbCrLf & resistData.InnerHtml)
         End Sub
     End Class
 
