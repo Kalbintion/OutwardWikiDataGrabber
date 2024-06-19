@@ -26,7 +26,9 @@ Namespace Item.Stats
             'Console.WriteLine("ParseDamage" & vbCrLf & damageData.InnerHtml)
             ' Each element type is wrapped in a child DIV with plain-text to be extracted by innerText
             ' and damage type to be extracted by the title attribute of the inner child (<A>)
-            If damageData.Children.Count > 0 AndAlso damageData.Children(0).TagName = "div" Then
+            Console.WriteLine("TAG:" & damageData.Children(0).TagName & vbTab & "Count:" & damageData.Children.Count)
+
+            If damageData.Children.Count > 0 AndAlso damageData.Children(0).TagName = "DIV" Then
 
                 For Each child As HtmlElement In damageData.Children()
                     Dim dmgAmt As String = child.InnerText.Trim()
@@ -37,7 +39,9 @@ Namespace Item.Stats
                         dmgAmt = dmgAmt / 100
                     End If
 
-                    DamageType.Add(dmgType, dmgAmt)
+                    Console.WriteLine("Type: " & dmgType & vbTab & "Amt: " & dmgAmt)
+
+                    If Not DamageType.ContainsKey(dmgType) Then DamageType.Add(dmgType, dmgAmt)
                 Next
             Else
                 ' Format not correct, not in child divs? Fallback to trying to parse
@@ -56,17 +60,21 @@ Namespace Item.Stats
                             dmgAmt = dmgAmt / 100
                         End If
 
-                        DamageType.Add(dmgType, dmgAmt)
+                        Console.WriteLine("Type: " & dmgType & vbTab & "Amt: " & dmgAmt)
+
+                        If Not DamageType.ContainsKey(dmgType) Then DamageType.Add(dmgType, dmgAmt)
                     End If
 
                     i += 1
                 Next
             End If
+
+            Console.WriteLine(String.Join(", ", DamageType.Select(Function(kvp) String.Format("{0}={1}", kvp.Key, kvp.Value)).ToArray()))
         End Sub
 
         Public Sub ParseDamageBonus(ByVal damageData As HtmlElement)
             'Console.WriteLine("ParseDamageBonus" & vbCrLf & damageData.InnerHtml)
-            If damageData.Children.Count > 0 AndAlso damageData.Children(0).TagName = "div" Then
+            If damageData.Children.Count > 0 AndAlso damageData.Children(0).TagName = "DIV" Then
 
                 For Each child As HtmlElement In damageData.Children()
                     Dim dmgAmt As String = child.InnerText.Trim()
@@ -77,7 +85,7 @@ Namespace Item.Stats
                         dmgAmt = dmgAmt / 100
                     End If
 
-                    DamageBonus.Add(dmgType, dmgAmt)
+                    If Not DamageBonus.ContainsKey(dmgType) Then DamageBonus.Add(dmgType, dmgAmt)
                 Next
             Else
                 ' Format not correct, not in child divs? Fallback to trying to parse
@@ -96,12 +104,13 @@ Namespace Item.Stats
                             dmgAmt = dmgAmt / 100
                         End If
 
-                        DamageBonus.Add(dmgType, dmgAmt)
+                        If Not DamageBonus.ContainsKey(dmgType) Then DamageBonus.Add(dmgType, dmgAmt)
                     End If
 
                     i += 1
                 Next
             End If
+            Console.WriteLine(String.Join(", ", DamageBonus.Select(Function(kvp) String.Format("{0}={1}", kvp.Key, kvp.Value)).ToArray()))
         End Sub
 
         Public Function AsJSON() As String

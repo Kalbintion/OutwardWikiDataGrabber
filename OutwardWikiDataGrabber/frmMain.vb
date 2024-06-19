@@ -288,11 +288,22 @@ Public Class frmMain
             End Select
         Next
 
+        ' Set other misc fields
+        itemInfo.Image = itemInfo.GetImageFileName()
+
+        ' Final check on item type
+        If IsNothing(itemInfo.Type) Then
+            If itemInfo.Food.Drink > 0 Or itemInfo.Food.Food > 0 Then
+                itemInfo.Type = "Food"
+            ElseIf Not itemInfo.Stats.Type = "" And Not itemInfo.Stats.ItemClass = "" Then
+                itemInfo.Type = "Weapon"
+            End If
+        End If
+
     End Sub
 
     Private Function GetItemData(ByVal name) As Item.Core
         For Each itm As Item.Core In Items
-            'Console.WriteLine(name & "(" & name.Length & ")" & vbTab & itm.Name & "(" & itm.Name.Length & ")")
             If String.Equals(itm.Name, name) Then Return itm
         Next
 

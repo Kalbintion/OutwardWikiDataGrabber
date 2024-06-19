@@ -17,7 +17,7 @@ Namespace Item.Stats
 
         Public Sub ParseResist(ByVal resistData As HtmlElement)
             'Console.WriteLine("ParseResist" & vbCrLf & resistData.InnerHtml)
-            If resistData.Children.Count > 0 AndAlso resistData.Children(0).TagName = "div" Then
+            If resistData.Children.Count > 0 AndAlso resistData.Children(0).TagName = "DIV" Then
 
                 For Each child As HtmlElement In resistData.Children()
                     Dim dmgAmt As String = child.InnerText.Trim()
@@ -28,7 +28,7 @@ Namespace Item.Stats
                         dmgAmt = dmgAmt / 100
                     End If
 
-                    DamageResist.Add(dmgType, dmgAmt)
+                    If Not DamageResist.ContainsKey(dmgType) Then DamageResist.Add(dmgType, dmgAmt)
                 Next
             Else
                 ' Format not correct, not in child divs? Fallback to trying to parse
@@ -47,12 +47,13 @@ Namespace Item.Stats
                             dmgAmt = dmgAmt / 100
                         End If
 
-                        DamageResist.Add(dmgType, dmgAmt)
+                        If Not DamageResist.ContainsKey(dmgType) Then DamageResist.Add(dmgType, dmgAmt)
                     End If
 
                     i += 1
                 Next
             End If
+            Console.WriteLine(String.Join(", ", DamageResist.Select(Function(kvp) String.Format("{0}={1}", kvp.Key, kvp.Value)).ToArray()))
         End Sub
     End Class
 
