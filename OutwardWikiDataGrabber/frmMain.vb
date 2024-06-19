@@ -104,8 +104,7 @@ Public Class frmMain
             Que.Add(New QueItem(newItem.WikiURL, AddressOf ParseItemInfo))
             Items.Add(newItem)
 
-            'Console.Write(i & vbTab)
-            'Console.WriteLine(newItem.AsJSON())
+            'Console.WriteLine(i & vbTab & newItem.AsJSON())
         Next
         Console.ForegroundColor = ConsoleColor.Cyan
         Console.WriteLine("file:///" & IO.Path.GetFullPath("./Pages/Complete.html"))
