@@ -52,6 +52,7 @@ Public Class frmMain
 
     Private Sub ResetProgress()
         tslCurrent.Text = "0"
+        progDataGrabber.Value = 0
     End Sub
 #End Region
 
@@ -72,14 +73,17 @@ Public Class frmMain
         Dim tables As HtmlElementCollection = wbBrowser.Document.GetElementsByTagName("tbody")
         Dim itemTable As HtmlElement = tables(0)
 
-        tslMax.Text = itemTable.Children.Count
-        progDataGrabber.Maximum = itemTable.Children.Count
+        ResetProgress()
+        SetProgress(itemTable.Children.Count)
 
         Dim i As Integer = 0
 
         For Each child As HtmlElement In itemTable.Children
             i += 1
-            If i = 1 Then Continue For
+            If i = 1 Then
+                DecrementProgress(1)
+                Continue For
+            End If
 
             Dim newItem As New Item.Core With {
                 .Name = child.Children(0).InnerText,
@@ -91,7 +95,10 @@ Public Class frmMain
             newItem.Value.Buy = child.Children(4).InnerText
 
             ' Skip nil object id's as theyre likely set pages
-            If newItem.ObjectID = "nil" Then Continue For
+            If newItem.ObjectID = "nil" Then
+                DecrementProgress(1)
+                Continue For
+            End If
 
             ' Add item data so far and que item for parsing info
             Que.Add(New QueItem(newItem.WikiURL, AddressOf ParseItemInfo))

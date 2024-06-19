@@ -31,7 +31,6 @@ Partial Class frmMain
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.StartToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.NextToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.StopToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ExitToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.wbBrowser = New System.Windows.Forms.WebBrowser()
         Me.StatusStrip1.SuspendLayout()
@@ -79,7 +78,7 @@ Partial Class frmMain
         '
         'MenuStrip1
         '
-        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.StartToolStripMenuItem, Me.NextToolStripMenuItem, Me.StopToolStripMenuItem, Me.ExitToolStripMenuItem})
+        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.StartToolStripMenuItem, Me.NextToolStripMenuItem, Me.ExitToolStripMenuItem})
         Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip1.Name = "MenuStrip1"
         Me.MenuStrip1.Size = New System.Drawing.Size(324, 24)
@@ -97,12 +96,6 @@ Partial Class frmMain
         Me.NextToolStripMenuItem.Name = "NextToolStripMenuItem"
         Me.NextToolStripMenuItem.Size = New System.Drawing.Size(44, 20)
         Me.NextToolStripMenuItem.Text = "Next"
-        '
-        'StopToolStripMenuItem
-        '
-        Me.StopToolStripMenuItem.Name = "StopToolStripMenuItem"
-        Me.StopToolStripMenuItem.Size = New System.Drawing.Size(43, 20)
-        Me.StopToolStripMenuItem.Text = "Stop"
         '
         'ExitToolStripMenuItem
         '
@@ -131,6 +124,7 @@ Partial Class frmMain
         Me.Controls.Add(Me.wbBrowser)
         Me.Controls.Add(Me.StatusStrip1)
         Me.Controls.Add(Me.MenuStrip1)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow
         Me.MainMenuStrip = Me.MenuStrip1
         Me.Name = "frmMain"
         Me.Text = "Outward Wiki Data Grabber"
@@ -151,7 +145,6 @@ Partial Class frmMain
     Friend WithEvents tslDivider As ToolStripStatusLabel
     Friend WithEvents tslMax As ToolStripStatusLabel
     Friend WithEvents StartToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents StopToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ExitToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents wbBrowser As WebBrowser
     Friend WithEvents NextToolStripMenuItem As ToolStripMenuItem
