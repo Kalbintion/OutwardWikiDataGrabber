@@ -16,7 +16,43 @@ Namespace Item.Stats
         End Function
 
         Public Sub ParseResist(ByVal resistData As HtmlElement)
-            Console.WriteLine("ParseResist" & vbCrLf & resistData.InnerHtml)
+            'Console.WriteLine("ParseResist" & vbCrLf & resistData.InnerHtml)
+            If resistData.Children.Count > 0 AndAlso resistData.Children(0).TagName = "div" Then
+
+                For Each child As HtmlElement In resistData.Children()
+                    Dim dmgAmt As String = child.InnerText.Trim()
+                    Dim dmgType As String = child.Children(0).GetAttribute("title").Trim()
+
+                    If dmgAmt.EndsWith("%") Then
+                        dmgAmt = dmgAmt.Replace("%", "")
+                        dmgAmt = dmgAmt / 100
+                    End If
+
+                    DamageResist.Add(dmgType, dmgAmt)
+                Next
+            Else
+                ' Format not correct, not in child divs? Fallback to trying to parse
+                Dim dmgTexts As String = resistData.InnerText
+                Dim dmgText() As String = dmgTexts.Split(" ")
+
+                Dim i As Integer = 0
+
+                For Each child As HtmlElement In resistData.Children()
+                    If child.TagName = "a" Then
+                        Dim dmgAmt As String = dmgText(i)
+                        Dim dmgType As String = child.GetAttribute("title")
+
+                        If dmgAmt.EndsWith("%") Then
+                            dmgAmt = dmgAmt.Replace("%", "")
+                            dmgAmt = dmgAmt / 100
+                        End If
+
+                        DamageResist.Add(dmgType, dmgAmt)
+                    End If
+
+                    i += 1
+                Next
+            End If
         End Sub
     End Class
 

@@ -19,7 +19,7 @@ Public Class frmMain
 
     Private Sub wbBrowser_DocumentCompleted(sender As Object, e As WebBrowserDocumentCompletedEventArgs) Handles wbBrowser.DocumentCompleted
         Console.WriteLine("Document Completed")
-        NextAction()
+        If Not IsNothing(NextAction) Then NextAction()
         ProcessNextQue()
     End Sub
 
@@ -28,6 +28,8 @@ Public Class frmMain
         wbBrowser.AllowWebBrowserDrop = False
         wbBrowser.WebBrowserShortcutsEnabled = False
         wbBrowser.IsWebBrowserContextMenuEnabled = False
+
+        wbBrowser.Navigate("file:///" & IO.Path.GetFullPath("./Pages/Startup.html"))
     End Sub
 
     Private Sub NextToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles NextToolStripMenuItem.Click
