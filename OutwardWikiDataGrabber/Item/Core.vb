@@ -14,6 +14,9 @@ Namespace Item
         Public Property Image As String
         Public Property ItemSet As String
 
+        Public Property MadeBy As String
+        Public Property Materials As String
+
         Public Function AsJSON() As String
             Return JsonConvert.SerializeObject(Me)
         End Function
