@@ -57,6 +57,7 @@ Partial Class frmMain
         Me.progDataGrabber.Maximum = 0
         Me.progDataGrabber.Name = "progDataGrabber"
         Me.progDataGrabber.Size = New System.Drawing.Size(100, 16)
+        Me.progDataGrabber.ToolTipText = "Overall status of data obtaining"
         '
         'tslCurrent
         '
@@ -90,18 +91,21 @@ Partial Class frmMain
         Me.StartToolStripMenuItem.Name = "StartToolStripMenuItem"
         Me.StartToolStripMenuItem.Size = New System.Drawing.Size(43, 20)
         Me.StartToolStripMenuItem.Text = "Start"
+        Me.StartToolStripMenuItem.ToolTipText = "Starts the process of getting information from the wiki"
         '
         'NextToolStripMenuItem
         '
         Me.NextToolStripMenuItem.Name = "NextToolStripMenuItem"
         Me.NextToolStripMenuItem.Size = New System.Drawing.Size(44, 20)
         Me.NextToolStripMenuItem.Text = "Next"
+        Me.NextToolStripMenuItem.ToolTipText = "Attempts to start the new que item, if there are any"
         '
         'ExitToolStripMenuItem
         '
         Me.ExitToolStripMenuItem.Name = "ExitToolStripMenuItem"
         Me.ExitToolStripMenuItem.Size = New System.Drawing.Size(38, 20)
         Me.ExitToolStripMenuItem.Text = "Exit"
+        Me.ExitToolStripMenuItem.ToolTipText = "Exits the program"
         '
         'wbBrowser
         '
