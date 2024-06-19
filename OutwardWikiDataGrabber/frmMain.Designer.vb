@@ -112,12 +112,16 @@ Partial Class frmMain
         '
         'wbBrowser
         '
+        Me.wbBrowser.AllowWebBrowserDrop = False
         Me.wbBrowser.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.wbBrowser.IsWebBrowserContextMenuEnabled = False
         Me.wbBrowser.Location = New System.Drawing.Point(0, 24)
         Me.wbBrowser.MinimumSize = New System.Drawing.Size(20, 20)
         Me.wbBrowser.Name = "wbBrowser"
+        Me.wbBrowser.ScriptErrorsSuppressed = True
         Me.wbBrowser.Size = New System.Drawing.Size(324, 98)
         Me.wbBrowser.TabIndex = 2
+        Me.wbBrowser.WebBrowserShortcutsEnabled = False
         '
         'frmMain
         '

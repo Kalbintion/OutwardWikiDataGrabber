@@ -10,6 +10,9 @@ Public Class frmMain
 
 #Region "Form"
     Private Sub StartToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles StartToolStripMenuItem.Click
+        SetProgress(0)
+        ResetProgress()
+
         Que.Add(New QueItem(URL_ALL_ITEMS, AddressOf ParseForItemList))
         ProcessNextQue()
     End Sub
@@ -22,10 +25,33 @@ Public Class frmMain
 
     Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         wbBrowser.ScriptErrorsSuppressed = True
+        wbBrowser.AllowWebBrowserDrop = False
+        wbBrowser.WebBrowserShortcutsEnabled = False
+        wbBrowser.IsWebBrowserContextMenuEnabled = False
     End Sub
 
     Private Sub NextToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles NextToolStripMenuItem.Click
         ProcessNextQue()
+    End Sub
+#End Region
+
+#Region "Helpers"
+    Private Sub DecrementProgress(ByVal amount As Integer)
+        progDataGrabber.Maximum -= amount
+        tslMax.Text = progDataGrabber.Maximum
+    End Sub
+
+    Private Sub IncrementProgress(ByVal amount As Integer)
+        progDataGrabber.Value += amount
+    End Sub
+
+    Private Sub SetProgress(ByVal amount As Integer)
+        tslMax.Text = amount
+        progDataGrabber.Maximum = amount
+    End Sub
+
+    Private Sub ResetProgress()
+        tslCurrent.Text = "0"
     End Sub
 #End Region
 
