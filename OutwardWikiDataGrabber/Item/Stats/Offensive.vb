@@ -23,10 +23,8 @@ Namespace Item.Stats
         End Sub
 
         Public Sub ParseDamage(ByVal damageData As HtmlElement)
-            'Console.WriteLine("ParseDamage" & vbCrLf & damageData.InnerHtml)
             ' Each element type is wrapped in a child DIV with plain-text to be extracted by innerText
             ' and damage type to be extracted by the title attribute of the inner child (<A>)
-            Console.WriteLine("TAG:" & damageData.Children(0).TagName & vbTab & "Count:" & damageData.Children.Count)
 
             If damageData.Children.Count > 0 AndAlso damageData.Children(0).TagName = "DIV" Then
 
@@ -38,8 +36,6 @@ Namespace Item.Stats
                         dmgAmt = dmgAmt.Replace("%", "")
                         dmgAmt = dmgAmt / 100
                     End If
-
-                    Console.WriteLine("Type: " & dmgType & vbTab & "Amt: " & dmgAmt)
 
                     If Not DamageType.ContainsKey(dmgType) Then DamageType.Add(dmgType, dmgAmt)
                 Next
@@ -60,16 +56,12 @@ Namespace Item.Stats
                             dmgAmt = dmgAmt / 100
                         End If
 
-                        Console.WriteLine("Type: " & dmgType & vbTab & "Amt: " & dmgAmt)
-
                         If Not DamageType.ContainsKey(dmgType) Then DamageType.Add(dmgType, dmgAmt)
                     End If
 
                     i += 1
                 Next
             End If
-
-            Console.WriteLine(String.Join(", ", DamageType.Select(Function(kvp) String.Format("{0}={1}", kvp.Key, kvp.Value)).ToArray()))
         End Sub
 
         Public Sub ParseDamageBonus(ByVal damageData As HtmlElement)
@@ -110,7 +102,6 @@ Namespace Item.Stats
                     i += 1
                 Next
             End If
-            Console.WriteLine(String.Join(", ", DamageBonus.Select(Function(kvp) String.Format("{0}={1}", kvp.Key, kvp.Value)).ToArray()))
         End Sub
 
         Public Function AsJSON() As String

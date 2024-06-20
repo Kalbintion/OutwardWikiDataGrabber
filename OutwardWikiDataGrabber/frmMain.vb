@@ -8,10 +8,12 @@ Public Class frmMain
     Private Const URL_BASE = "https://outward.fandom.com/"
     Private Const URL_ALL_ITEMS = URL_BASE & "wiki/Items/Item_Values"
 
-#Region "Form"
+#Region "Toolstrip"
     Private Sub StartToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles StartToolStripMenuItem.Click
         SetProgress(0)
         ResetProgress()
+
+        StartToolStripMenuItem.Enabled = False
 
         Que.Add(New QueItem(URL_ALL_ITEMS, AddressOf ParseForItemList))
         ProcessNextQue()
@@ -19,11 +21,35 @@ Public Class frmMain
 
     Private Sub wbBrowser_DocumentCompleted(sender As Object, e As WebBrowserDocumentCompletedEventArgs) Handles wbBrowser.DocumentCompleted
         Console.WriteLine("Document Completed")
+
+        NextToolStripMenuItem.Enabled = True
+
         If Not IsNothing(NextAction) Then NextAction()
         ProcessNextQue()
     End Sub
 
+    Private Sub wbBrowser_Navigating(sender As Object, e As WebBrowserNavigatingEventArgs) Handles wbBrowser.Navigating
+        NextToolStripMenuItem.Enabled = False
+    End Sub
+
+    Private Sub NextToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles NextToolStripMenuItem.Click
+        ProcessNextQue()
+    End Sub
+
+    Private Sub ExitToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExitToolStripMenuItem.Click
+        Me.Close()
+    End Sub
+
+    Private Sub SettingsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SettingsToolStripMenuItem.Click
+        frmSettings.ShowDialog(Me)
+    End Sub
+#End Region
+
+#Region "Form"
     Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        My.Settings.Reload()
+        updateProperties()
+
         wbBrowser.ScriptErrorsSuppressed = True
         wbBrowser.AllowWebBrowserDrop = False
         wbBrowser.WebBrowserShortcutsEnabled = False
@@ -32,8 +58,40 @@ Public Class frmMain
         wbBrowser.Navigate("file:///" & IO.Path.GetFullPath("./Pages/Startup.html"))
     End Sub
 
-    Private Sub NextToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles NextToolStripMenuItem.Click
-        ProcessNextQue()
+    Private Sub frmMain_KeyDown(sender As Object, e As KeyEventArgs) Handles Me.KeyDown
+        Console.WriteLine(e.KeyData)
+        Select Case e.KeyData
+            Case My.Settings.HotkeyNext
+                NextToolStripMenuItem.PerformClick()
+            Case My.Settings.HotkeyStart
+                StartToolStripMenuItem.PerformClick()
+        End Select
+    End Sub
+
+    Private Sub frmMain_PreviewKeyDown(sender As Object, e As PreviewKeyDownEventArgs) Handles Me.PreviewKeyDown
+        Console.WriteLine(e.KeyData)
+        Select Case e.KeyData
+            Case My.Settings.HotkeyNext
+                NextToolStripMenuItem.PerformClick()
+            Case My.Settings.HotkeyStart
+                StartToolStripMenuItem.PerformClick()
+        End Select
+    End Sub
+
+    Private Sub frmMain_KeyPress(sender As Object, e As KeyPressEventArgs) Handles Me.KeyPress
+        Console.WriteLine(e.KeyChar)
+    End Sub
+
+    Private Sub frmMain_LocationChanged(sender As Object, e As System.EventArgs) Handles Me.LocationChanged
+        My.Settings.Location = Me.Location
+    End Sub
+
+    Private Sub frmMain_ResizeEnd(sender As Object, e As System.EventArgs) Handles Me.ResizeEnd
+        My.Settings.Size = Me.Size
+    End Sub
+
+    Private Sub frmMain_FormClosing(sender As Object, e As System.EventArgs) Handles Me.FormClosing
+        My.Settings.Save()
     End Sub
 #End Region
 
@@ -56,13 +114,28 @@ Public Class frmMain
         tslCurrent.Text = "0"
         progDataGrabber.Value = 0
     End Sub
+
+    Public Sub updateProperties()
+        For Each control As Object In Me.Controls
+            control.BackColor = My.Settings.BackgroundColor
+            control.ForeColor = My.Settings.TextColor
+            control.Font = My.Settings.AppFont
+        Next
+
+        StartToolStripMenuItem.ShortcutKeys = My.Settings.HotkeyStart
+        NextToolStripMenuItem.ShortcutKeys = My.Settings.HotkeyNext
+    End Sub
 #End Region
 
 #Region "Handlers"
     Private Sub ProcessNextQue()
         Console.WriteLine("Process Next Que [" & Que.Count & "]")
 
-        If Que.Count <= 0 Then Exit Sub
+        If Que.Count <= 0 Then
+            StartToolStripMenuItem.Enabled = True
+            NextToolStripMenuItem.Enabled = True
+            Exit Sub
+        End If
 
         Dim nextQue As QueItem = Que.First()
         NextAction = nextQue.GetAction()
@@ -315,5 +388,9 @@ Public Class frmMain
         System.IO.File.WriteAllText("items.json", ItemString)
     End Sub
 
+    Private Sub wbBrowser_PreviewKeyDown(sender As Object, e As PreviewKeyDownEventArgs) Handles wbBrowser.PreviewKeyDown
+        frmMain_PreviewKeyDown(sender, e)
+    End Sub
 #End Region
+
 End Class

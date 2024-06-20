@@ -16,7 +16,6 @@ Namespace Item.Stats
         End Function
 
         Public Sub ParseResist(ByVal resistData As HtmlElement)
-            'Console.WriteLine("ParseResist" & vbCrLf & resistData.InnerHtml)
             If resistData.Children.Count > 0 AndAlso resistData.Children(0).TagName = "DIV" Then
 
                 For Each child As HtmlElement In resistData.Children()
@@ -53,7 +52,6 @@ Namespace Item.Stats
                     i += 1
                 Next
             End If
-            Console.WriteLine(String.Join(", ", DamageResist.Select(Function(kvp) String.Format("{0}={1}", kvp.Key, kvp.Value)).ToArray()))
         End Sub
     End Class
 

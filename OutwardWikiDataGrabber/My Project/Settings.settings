@@ -1,7 +1,36 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
-<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" UseMySettingsClassName="true">
-  <Profiles>
-    <Profile Name="(Default)" />
-  </Profiles>
-  <Settings />
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="My" GeneratedClassName="MySettings" UseMySettingsClassName="true">
+  <Profiles />
+  <Settings>
+    <Setting Name="OutputFileName" Type="System.String" Scope="User">
+      <Value Profile="(Default)">items</Value>
+    </Setting>
+    <Setting Name="OutputFilePath" Type="System.String" Scope="User">
+      <Value Profile="(Default)">./</Value>
+    </Setting>
+    <Setting Name="OutputFileExt" Type="System.String" Scope="User">
+      <Value Profile="(Default)">.json</Value>
+    </Setting>
+    <Setting Name="TextColor" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">ControlText</Value>
+    </Setting>
+    <Setting Name="BackgroundColor" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">Control</Value>
+    </Setting>
+    <Setting Name="Location" Type="System.Drawing.Point" Scope="User">
+      <Value Profile="(Default)">0, 0</Value>
+    </Setting>
+    <Setting Name="Size" Type="System.Drawing.Size" Scope="User">
+      <Value Profile="(Default)">0, 0</Value>
+    </Setting>
+    <Setting Name="AppFont" Type="System.Drawing.Font" Scope="User">
+      <Value Profile="(Default)">Courier New, 8.25pt</Value>
+    </Setting>
+    <Setting Name="HotkeyStart" Type="System.Windows.Forms.Keys" Scope="User">
+      <Value Profile="(Default)">F5</Value>
+    </Setting>
+    <Setting Name="HotkeyNext" Type="System.Windows.Forms.Keys" Scope="User">
+      <Value Profile="(Default)">F7</Value>
+    </Setting>
+  </Settings>
 </SettingsFile>
