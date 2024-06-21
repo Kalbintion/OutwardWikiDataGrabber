@@ -94,6 +94,8 @@
     <Compile Include="Item\Stats\Offensive.vb" />
     <Compile Include="Item\Stats\Core.vb" />
     <Compile Include="Item\Value.vb" />
+    <Compile Include="Logger\Logger.vb" />
+    <Compile Include="Logger\LogLevels.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>

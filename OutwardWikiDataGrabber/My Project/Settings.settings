@@ -32,5 +32,17 @@
     <Setting Name="HotkeyNext" Type="System.Windows.Forms.Keys" Scope="User">
       <Value Profile="(Default)">F7</Value>
     </Setting>
+    <Setting Name="AppLogging" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="AppLoggingLevel" Type="OutwardWikiDataGrabber.Logger.LogLevels" Scope="User">
+      <Value Profile="(Default)">NONE</Value>
+    </Setting>
+    <Setting Name="AppLoggingPath" Type="System.String" Scope="User">
+      <Value Profile="(Default)">./logs</Value>
+    </Setting>
+    <Setting Name="AppLoggingMax" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">5</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

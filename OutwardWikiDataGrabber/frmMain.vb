@@ -20,7 +20,7 @@ Public Class frmMain
     End Sub
 
     Private Sub wbBrowser_DocumentCompleted(sender As Object, e As WebBrowserDocumentCompletedEventArgs) Handles wbBrowser.DocumentCompleted
-        Console.WriteLine("Document Completed")
+        If My.Settings.AppLoggingLevel >= Logger.LogLevels.BASIC Then Logger.Logger.WriteLog("Document Completed: " & wbBrowser.Url.ToString())
 
         NextToolStripMenuItem.Enabled = True
 
@@ -59,6 +59,10 @@ Public Class frmMain
         Me.Location = My.Settings.Location
         Me.Size = My.Settings.Size
 
+        ' Enabled console writing & check log file count
+        Logger.Logger.WriteToConsole = True
+        Logger.Logger.ClearExcessLogs()
+
         ' Set-up browser configuration to prevent user control & errors
         wbBrowser.ScriptErrorsSuppressed = True
         wbBrowser.AllowWebBrowserDrop = False
@@ -70,7 +74,8 @@ Public Class frmMain
     End Sub
 
     Private Sub frmMain_KeyDown(sender As Object, e As KeyEventArgs) Handles Me.KeyDown
-        Console.WriteLine(e.KeyData)
+        If My.Settings.AppLoggingLevel >= Logger.LogLevels.ALL Then Logger.Logger.WriteLog("Got key data: " & e.KeyData)
+
         Select Case e.KeyData
             Case My.Settings.HotkeyNext
                 NextToolStripMenuItem.PerformClick()
@@ -80,17 +85,14 @@ Public Class frmMain
     End Sub
 
     Private Sub frmMain_PreviewKeyDown(sender As Object, e As PreviewKeyDownEventArgs) Handles Me.PreviewKeyDown
-        Console.WriteLine(e.KeyData)
+        If My.Settings.AppLoggingLevel >= Logger.LogLevels.ALL Then Logger.Logger.WriteLog("Got key data: " & e.KeyData)
+
         Select Case e.KeyData
             Case My.Settings.HotkeyNext
                 NextToolStripMenuItem.PerformClick()
             Case My.Settings.HotkeyStart
                 StartToolStripMenuItem.PerformClick()
         End Select
-    End Sub
-
-    Private Sub frmMain_KeyPress(sender As Object, e As KeyPressEventArgs) Handles Me.KeyPress
-        Console.WriteLine(e.KeyChar)
     End Sub
 
     Private Sub frmMain_LocationChanged(sender As Object, e As System.EventArgs) Handles Me.LocationChanged
@@ -145,7 +147,7 @@ Public Class frmMain
 
 #Region "Handlers"
     Private Sub ProcessNextQue()
-        Console.WriteLine("Process Next Que [" & Que.Count & "]")
+        If My.Settings.AppLoggingLevel >= Logger.LogLevels.BASIC Then Logger.Logger.WriteLog("Process Next Que [" & Que.Count & "]")
 
         If Que.Count <= 0 Then
             StartToolStripMenuItem.Enabled = True
@@ -160,7 +162,8 @@ Public Class frmMain
     End Sub
 
     Private Sub ParseForItemList()
-        Console.WriteLine("Parse For Item List")
+        If My.Settings.AppLoggingLevel >= Logger.LogLevels.BASIC Then Logger.Logger.WriteLog("Parse For Item List")
+
         Dim tables As HtmlElementCollection = wbBrowser.Document.GetElementsByTagName("tbody")
         Dim itemTable As HtmlElement = tables(0)
 
@@ -195,13 +198,12 @@ Public Class frmMain
             Que.Add(New QueItem(newItem.WikiURL, AddressOf ParseItemInfo))
             Items.Add(newItem)
 
-            'Console.WriteLine(i & vbTab & newItem.AsJSON())
+            If My.Settings.AppLoggingLevel >= Logger.LogLevels.ALL Then Logger.Logger.WriteLog(i & vbTab & newItem.AsJSON())
         Next
-        Console.ForegroundColor = ConsoleColor.Cyan
-        Console.WriteLine("file:///" & IO.Path.GetFullPath("./Pages/Complete.html"))
-        Console.ForegroundColor = ConsoleColor.White
-        Que.Add(New QueItem("file:///" & IO.Path.GetFullPath("./Pages/Complete.html"), AddressOf WriteJSONContent))
 
+        If My.Settings.AppLoggingLevel >= Logger.LogLevels.ADVANCED Then Logger.Logger.WriteLog("file:///" & IO.Path.GetFullPath("./Pages/Complete.html"))
+
+        Que.Add(New QueItem("file:///" & IO.Path.GetFullPath("./Pages/Complete.html"), AddressOf WriteJSONContent))
     End Sub
 
     Private Sub ParseItemInfo()
@@ -215,13 +217,11 @@ Public Class frmMain
 
         Dim itemInfo As Item.Core = GetItemData(itemName)
         If IsNothing(itemInfo) Then
-            Console.WriteLine("Failed to get item data for " & itemName)
+            If My.Settings.AppLoggingLevel >= Logger.LogLevels.BASIC Then Logger.Logger.WriteLog("Failed to get item data for " & itemName)
             Return
         End If
 
-        Console.ForegroundColor = ConsoleColor.Green
-        Console.WriteLine("Got item info for " & itemName)
-        Console.ForegroundColor = ConsoleColor.White
+        If My.Settings.AppLoggingLevel >= Logger.LogLevels.BASIC Then Logger.Logger.WriteLog("Got item info for " & itemName)
 
         For i = 3 To infoTable.Children.Count - 1
             Dim rowInfo = infoTable.Children(i)
@@ -372,8 +372,7 @@ Public Class frmMain
 
                     ' Unknown Header
                 Case Else
-                    Console.WriteLine("Unknown Header: " & rowHeader)
-                    Console.WriteLine(vbTab & "w/ Data: " & rowData)
+                    If My.Settings.AppLoggingLevel >= Logger.LogLevels.ADVANCED Then Logger.Logger.WriteLog("Unknown Header: " & rowHeader & Environment.NewLine & vbTab & "w/ Data: " & rowData)
             End Select
         Next
 

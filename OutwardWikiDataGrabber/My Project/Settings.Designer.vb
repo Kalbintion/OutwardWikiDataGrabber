@@ -173,6 +173,54 @@ Namespace My
                 Me("HotkeyNext") = value
             End Set
         End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property AppLogging() As Boolean
+            Get
+                Return CType(Me("AppLogging"),Boolean)
+            End Get
+            Set
+                Me("AppLogging") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("NONE")>  _
+        Public Property AppLoggingLevel() As Global.OutwardWikiDataGrabber.Logger.LogLevels
+            Get
+                Return CType(Me("AppLoggingLevel"),Global.OutwardWikiDataGrabber.Logger.LogLevels)
+            End Get
+            Set
+                Me("AppLoggingLevel") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("./logs")>  _
+        Public Property AppLoggingPath() As String
+            Get
+                Return CType(Me("AppLoggingPath"),String)
+            End Get
+            Set
+                Me("AppLoggingPath") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("5")>  _
+        Public Property AppLoggingMax() As Integer
+            Get
+                Return CType(Me("AppLoggingMax"),Integer)
+            End Get
+            Set
+                Me("AppLoggingMax") = value
+            End Set
+        End Property
     End Class
 End Namespace
 
