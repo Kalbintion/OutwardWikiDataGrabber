@@ -53,12 +53,10 @@
             If files.Count > maxFiles Then
                 ' We need to prune
                 Array.Sort(files)
-                Array.Reverse(files)
 
-
-                For i = 0 To maxFiles - files.Count
+                For i = 0 To files.Count - maxFiles
                     Try
-                        System.IO.File.Delete(path & files(i))
+                        System.IO.File.Delete(files(i))
                         Logger.WriteLog("Deleted old log " & files(i))
                     Catch ex As Exception
                         Logger.WriteLog("Failed to deleted old log " & files(i))
