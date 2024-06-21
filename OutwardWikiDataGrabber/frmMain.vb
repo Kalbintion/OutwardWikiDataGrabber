@@ -43,6 +43,10 @@ Public Class frmMain
     Private Sub SettingsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SettingsToolStripMenuItem.Click
         frmSettings.ShowDialog(Me)
     End Sub
+
+    Private Sub ExportToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExportToolStripMenuItem.Click
+        WriteJSONContent()
+    End Sub
 #End Region
 
 #Region "Form"
@@ -385,7 +389,43 @@ Public Class frmMain
 
     Private Sub WriteJSONContent()
         Dim ItemString As String = JsonConvert.SerializeObject(Items)
-        System.IO.File.WriteAllText("items.json", ItemString)
+        Dim dir As String = My.Settings.OutputFilePath
+        Dim fil As String = My.Settings.OutputFileName
+        Dim ext As String = My.Settings.OutputFileExt
+
+        Dim invalidPathChars As Char() = System.IO.Path.GetInvalidPathChars()
+        Dim invalidFileChars As Char() = System.IO.Path.GetInvalidFileNameChars()
+
+        Dim invalidPathCheck As New System.Text.RegularExpressions.Regex("[" & New String(invalidPathChars) & "]")
+        Dim invalidFileCheck As New System.Text.RegularExpressions.Regex("[" & New String(invalidFileChars) & "]")
+
+        If Not dir.EndsWith("/") And Not dir.EndsWith("\") Then
+            dir &= "/"
+        End If
+        If Not ext.StartsWith(".") Then
+            ext = "." & ext
+        End If
+
+        If invalidPathCheck.Matches(dir).Count > 0 Then
+            MessageBox.Show("Could not save file! Invalid characters found in save path." & Environment.NewLine &
+                            "Invalid characters: " & invalidPathChars.ToString() & Environment.NewLine &
+                            "Provided path: " & dir & Environment.NewLine &
+                            "Check supplied path, once verified use the ""Export"" option to try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
+            frmSettings.ShowDialog(Me)
+            Exit Sub
+        End If
+
+        If invalidFileCheck.Matches(fil).Count > 0 Or invalidFileCheck.Matches(ext).Count > 0 Then
+            MessageBox.Show("Could not save file! Invalid characters found in the filename or extension." & Environment.NewLine &
+                            "Invalid characters: " & invalidFileChars.ToString() & Environment.NewLine &
+                            "Provided name: " & fil & vbTab & "Provided ext: " & ext & Environment.NewLine &
+                            "Check supplied file name and extension, once verified use the ""Export"" option to try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
+            frmSettings.ShowDialog(Me)
+            Exit Sub
+        End If
+
+        Dim path As String = dir & fil & ext
+        System.IO.File.WriteAllText(path, ItemString)
     End Sub
 
     Private Sub wbBrowser_PreviewKeyDown(sender As Object, e As PreviewKeyDownEventArgs) Handles wbBrowser.PreviewKeyDown
