@@ -51,14 +51,21 @@ Public Class frmMain
 
 #Region "Form"
     Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        ' Get settings from store and update settings
         My.Settings.Reload()
         updateProperties()
 
+        ' Load in location & size info from last run
+        Me.Location = My.Settings.Location
+        Me.Size = My.Settings.Size
+
+        ' Set-up browser configuration to prevent user control & errors
         wbBrowser.ScriptErrorsSuppressed = True
         wbBrowser.AllowWebBrowserDrop = False
         wbBrowser.WebBrowserShortcutsEnabled = False
         wbBrowser.IsWebBrowserContextMenuEnabled = False
 
+        ' Load the startup page
         wbBrowser.Navigate("file:///" & IO.Path.GetFullPath("./Pages/Startup.html"))
     End Sub
 
@@ -96,6 +103,11 @@ Public Class frmMain
 
     Private Sub frmMain_FormClosing(sender As Object, e As System.EventArgs) Handles Me.FormClosing
         My.Settings.Save()
+    End Sub
+
+    Private Sub wbBrowser_PreviewKeyDown(sender As Object, e As PreviewKeyDownEventArgs) Handles wbBrowser.PreviewKeyDown
+        ' Sends key preview off to main handler, otherwise browser control is blocking while visible
+        frmMain_PreviewKeyDown(sender, e)
     End Sub
 #End Region
 
@@ -410,7 +422,8 @@ Public Class frmMain
             MessageBox.Show("Could not save file! Invalid characters found in save path." & Environment.NewLine &
                             "Invalid characters: " & invalidPathChars.ToString() & Environment.NewLine &
                             "Provided path: " & dir & Environment.NewLine &
-                            "Check supplied path, once verified use the ""Export"" option to try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
+                            "Check supplied path, once verified use the ""Export"" Action option to try again.",
+                            "Error", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
             frmSettings.ShowDialog(Me)
             Exit Sub
         End If
@@ -419,17 +432,14 @@ Public Class frmMain
             MessageBox.Show("Could not save file! Invalid characters found in the filename or extension." & Environment.NewLine &
                             "Invalid characters: " & invalidFileChars.ToString() & Environment.NewLine &
                             "Provided name: " & fil & vbTab & "Provided ext: " & ext & Environment.NewLine &
-                            "Check supplied file name and extension, once verified use the ""Export"" option to try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
+                            "Check supplied file name and extension, once verified use the ""Export"" Action option to try again.",
+                            "Error", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
             frmSettings.ShowDialog(Me)
             Exit Sub
         End If
 
         Dim path As String = dir & fil & ext
         System.IO.File.WriteAllText(path, ItemString)
-    End Sub
-
-    Private Sub wbBrowser_PreviewKeyDown(sender As Object, e As PreviewKeyDownEventArgs) Handles wbBrowser.PreviewKeyDown
-        frmMain_PreviewKeyDown(sender, e)
     End Sub
 #End Region
 
