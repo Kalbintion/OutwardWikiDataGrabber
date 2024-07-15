@@ -243,8 +243,7 @@ Public Class frmMain
 
             Select Case rowHeader
                 ' Standard Headers
-                Case "Slot"
-                Case "Type"
+                Case "Type", "Slot"
                     itemInfo.Stats.Type = rowData
                 Case "Class"
                     itemInfo.Stats.ItemClass = rowData
