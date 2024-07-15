@@ -385,6 +385,10 @@ Public Class frmMain
                 itemInfo.Type = "Food"
             ElseIf Not itemInfo.Stats.Type = "" And Not itemInfo.Stats.ItemClass = "" Then
                 itemInfo.Type = "Weapon"
+            ElseIf Not itemInfo.Stats.Type = "" Then
+                itemInfo.Type = itemInfo.Stats.Type
+            ElseIf Not itemInfo.Stats.ItemClass = "" Then
+                itemInfo.Type = itemInfo.Stats.ItemClass
             End If
         End If
 
